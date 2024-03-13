@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temperature Converter</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/Zugpsitze_mountain.jpg?crop=0%2C176%2C3008%2C1654&wid=4000&hei=2200&scl=0.752'); 
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  .container {
+    text-align: center;   
+    background-color: rgba(255, 255, 255, 0.5);
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    margin-top: 50px;
+  }
+  input[type="number"] {
+    width: 150px;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  select {
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Temperature Converter</h2>
+  <input type="number" id="temperatureInput" placeholder="Enter temperature" required>
+  <select id="conversionType">
+    <option value="celsius">Celsius</option>
+    <option value="fahrenheit">Fahrenheit</option>
+    <option value="kelvin">Kelvin</option>
+  </select>
+  <button onclick="convertTemperature()">Convert</button>
+  <div id="result"></div>
+</div>
+
+<script>
+  function convertTemperature() {
+    const temperatureInput = parseFloat(document.getElementById("temperatureInput").value);
+    const conversionType = document.getElementById("conversionType").value;
+    let convertedTemperature;
+    let unit;
+
+    if (isNaN(temperatureInput)) {
+      document.getElementById("result").innerText = "Please enter a valid number!";
+      return;
+    }
+
+    if (conversionType === "celsius") {
+      convertedTemperature = (temperatureInput - 32) * 5/9;
+      unit = "Celsius";
+    } else if (conversionType === "fahrenheit") {
+      convertedTemperature = (temperatureInput * 9/5) + 32;
+      unit = "Fahrenheit";
+    } else if (conversionType === "kelvin") {
+      convertedTemperature = temperatureInput + 273.15;
+      unit = "Kelvin";
+    }
+
+    document.getElementById("result").innerText = `Converted temperature: ${convertedTemperature.toFixed(2)} ${unit}`;
+  }
+</script>
+
+</body>
+</html>
